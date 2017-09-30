@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 
+
 public class Vector {
 
     private ArrayList<Double> components;
-    private double magnitude;
+    private double mag;
 
     public Vector() {
         components = new ArrayList<Double>();
@@ -14,13 +15,15 @@ public class Vector {
         for(Double comp : d) {
             components.add(comp);
         }
-        double mag = (double [] l) -> {
-            double s = 0;
-            for(int i = 0; i < l.length; i++) {
-                s += Math.pow(l[i], 2);
-            }
-            return Math.sqrt(s)
-        };
+        setMag();
+    }
+
+    private void setMag() {
+        double t = 0;
+        for(int i =0; i < this.getRawComponents().length; i++) {
+            t += Math.pow(this.getRawComponents()[i], 2);
+        }
+        this.mag = Math.sqrt(t);
     }
 
     public double[] getRawComponents() {
@@ -36,6 +39,7 @@ public class Vector {
         for(Double d: f) {
             components.add(d);
         }
+        setMag();
     }
 
     public static Vector subtract(Vector f, Vector s) {
@@ -74,6 +78,30 @@ public class Vector {
         }
         t += ">";
         return t;
+    }
+
+    public double magnitude() {
+        return mag;
+    }
+
+    public static double dot(Vector f, Vector s) {
+        double[] ff = f.getRawComponents();
+        double[] ss = s.getRawComponents();
+        if(ff.length != ss.length) throw new RuntimeException("Vectors are in different dimensions.");
+        double t = 0;
+        for(int i = 0; i < ff.length; i++) {
+            t += ss[i] * ff[i];
+        }
+        return t;
+    }
+    /*
+    public static Vector cross(Vector f, Vector s) {
+
+    }
+    */
+
+    public void clear() {
+        components.clear();
     }
 
 }
