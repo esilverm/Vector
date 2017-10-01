@@ -42,6 +42,22 @@ public class Vector {
         setMag();
     }
 
+    public void overrideComponents(double[] f) {
+        components.clear();
+        for(Double d: f) {
+            components.add(d);
+        }
+        setMag();
+    }
+
+    private void setComp(double[] f) {
+        components.clear();
+        for(Double d: f) {
+            components.add(d);
+        }
+        setMag();
+    }
+
     public static Vector subtract(Vector f, Vector s) {
         Vector o = Vector.opposite(s);
         Vector t = Vector.add(f, o);
@@ -94,6 +110,39 @@ public class Vector {
         }
         return t;
     }
+
+    public void multiplyByScalar(double d) {
+        double[] t = this.getRawComponents();
+        for(int i = 0; i < t.length; i++) {
+            t[i] *= d;
+        }
+        setComp(t);
+    }
+
+    public void divideByScalar(double d) {
+        double[] t = this.getRawComponents();
+        for(int i = 0; i < t.length; i++) {
+            t[i] /= d;
+        }
+        setComp(t);
+    }
+
+    public void addScalar(double d) {
+        double[] t = this.getRawComponents();
+        for(int i = 0; i < t.length; i++) {
+            t[i] += d;
+        }
+        setComp(t);
+    }
+
+    public void subtractScalar(double d) {
+        double[] t = this.getRawComponents();
+        for(int i = 0; i < t.length; i++) {
+            t[i] -= d;
+        }
+        setComp(t);
+    }
+
     /*
     public static Vector cross(Vector f, Vector s) {
 
