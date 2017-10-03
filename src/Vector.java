@@ -5,6 +5,7 @@ public class Vector {
 
     private ArrayList<Double> components;
     private double mag;
+    Angle angle;
 
     public Vector() {
         components = new ArrayList<Double>();
@@ -16,6 +17,25 @@ public class Vector {
             components.add(comp);
         }
         setMag();
+        if(d.length == 2) {
+            cart();
+        }
+    }
+
+    public Vector(double m, Angle a) {
+        mag = m;
+        angle = a;
+        rec();
+    }
+
+    private void rec() {
+        components.clear();
+        components.add(mag * Math.cos(angle.getAngleDeg()));
+        components.add(mag * Math.sin(angle.getAngleDeg()));
+    }
+
+    private void cart() {
+        angle = new Angle (Math.atan(components.get(1)/components.get(0)));
     }
 
     private void setMag() {
